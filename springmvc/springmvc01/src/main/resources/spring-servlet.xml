@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    1、请求映射器
+    项目中会定义多个接口，这些接口分别用来处理不同的前端请求，请求映射器负责根据前端请求的url来找到合适的接口
+    BeanNameUrlHandlerMapping通过实例名进行映射的
+    2、请求处理器
+    请求映射器找到处理接口后，请求处理器负责去调用接口
+    -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!--
+    配置请求映射
+    当前端发送来的请求为 "/book" 时，该请求将交给 BookController 来处理
+    -->
+    <bean class="com.longlong.BookController" name="/book" />
+
+    <!-- 配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
