@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean class="com.longlong.MyCalculator" id="myCalculator"/>
+    <bean id="logAspect2" class="com.longlong.LogAspect2"/>
+
+<!--
+    这里配置aop，实际上就是配置切面（切点+Advice）
+-->
+    <aop:config>
+
+        <!--
+        aop:aspect 标签作用类似于@Aspect
+        -->
+        <aop:aspect ref="logAspect2">
+            <!--
+            定义切点
+            <aop:pointcut id="pc1" expression="@annotation(com.longlong.MyAction)"/>
+            -->
+            <aop:pointcut id="pc1" expression="execution(* com.longlong.MyCalculator.*(..))"/>
+            <!-- 通知 -->
+            <aop:before method="before" pointcut-ref="pc1"/>
+            <aop:after method="after" pointcut-ref="pc1"/>
+            <aop:after-returning method="returning" pointcut-ref="pc1" returning="result"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

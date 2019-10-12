@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="cat1" class="com.longlong.Cat">
+        <property name="id" value="1"/>
+        <property name="name" value="小白"/>
+        <property name="color" value="白色"/>
+    </bean>
+
+    <bean id="user1" class="com.longlong.User">
+        <property name="id" value="1"/>
+        <property name="name" value="张三"/>
+        <property name="address" value="深圳"/>
+        <property name="cat" ref="cat1"/>
+    </bean>
+
+    <bean id="user2" class="com.longlong.User">
+        <constructor-arg name="id" value="2"/>
+        <constructor-arg name="name" value="李四"/>
+        <constructor-arg name="address" value="北京"/>
+        <constructor-arg name="cat" ref="cat1"/>
+    </bean>
+
+    <bean id="user3" class="com.longlong.User" p:id="3" p:name="王五" p:address="郑州" p:cat-ref="cat1"/>
+
+    <bean id="user4" class="com.longlong.User">
+        <property name="id" value="3"/>
+        <property name="name" value="孙六"/>
+        <property name="address" value="广州"/>
+        <property name="favorites">
+            <list>
+                <value>足球</value>
+                <value>篮球</value>
+            </list>
+        </property>
+        <property name="books">
+            <list>
+                <bean class="com.longlong.Book" p:name="三国演义" p:id="1"/>
+                <bean class="com.longlong.Book" p:name="红楼梦" p:id="2"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="book1" class="com.longlong.Book" p:name="三国演义" p:id="1" />
+    <bean id="book2" class="com.longlong.Book" p:name="红楼梦" p:id="2" />
+
+    <util:list id="favorites">
+        <value>唱歌</value>
+        <value>跳舞</value>
+    </util:list>
+
+    <bean id="user5" class="com.longlong.User" p:id="4" p:name="小明" p:address="河南" p:cat-ref="cat1" p:favorites-ref="favorites">
+        <property name="books">
+            <list>
+                <ref bean="book1"/>
+                <ref bean="book2"/>
+            </list>
+        </property>
+        <property name="info">
+            <map>
+                <entry key="age" value="99"/>
+                <entry key="cat" value-ref="cat1"/>
+            </map>
+        </property>
+        <property name="props">
+            <props>
+                <prop key="gender">男</prop>
+                <prop key="national">中国</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
