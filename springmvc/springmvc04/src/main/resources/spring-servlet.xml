@@ -4,22 +4,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mvc:annotation-driven conversion-service="formattingConversionService" />
+    <mvc:annotation-driven />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="suffix" value=".jsp"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/jsp/" />
     </bean>
 
     <context:component-scan base-package="com.longlong"/>
-
-    <!-- 配置类型转换 -->
-    <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="formattingConversionService">
-        <property name="converters">
-            <set>
-                <bean class="com.longlong.DateConverter"/>
-            </set>
-        </property>
-    </bean>
 </beans>
