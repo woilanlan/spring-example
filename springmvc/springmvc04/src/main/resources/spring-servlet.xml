@@ -4,6 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="com.longlong"/>
+
     <mvc:annotation-driven />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -12,5 +14,34 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
     </bean>
 
-    <context:component-scan base-package="com.longlong"/>
+    <!--
+    <bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" id="multipartResolver"/>
+    -->
+    <!--
+    注意：CommonsMultipartResolver 的 id 必须为 multipartResolver
+    这个 bean 是在 DispatcherServlet 中加载，DispatcherServlet 通过名字来查找这个 Bean (查看其中的 initMultipartResolver 方法)
+    没有 id 要求的则是通过类型来查找
+     -->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
+
+    <!--
+    在 SpringMVC 中，默认情况下，所有的静态资源都会被拦截，（js,css,html,图片，视频，音频）,需要手动配置静态资源目录
+    mapping 表示映射路径，即请求规则符合 /static/img/** ，则认为这是一个静态资源(可以和实际路径名称不一致)
+    location 则定义了这个静态资源的真实路径
+    * 表示一层路径
+    ** 是一种ant风格的路径，表示多层路径。例如： static/img/aa/bb/cc/01.png
+
+    例如：浏览器发送 http://localhost:8080/static/img/01.png 请求，该请求符合映射路径 /static/img/* ，此时 * 表示 01.png
+    springmvc 会将 01.png 补充到对应的 location 即 /static/img/ 后面，进而查找到文件
+
+    如果浏览器发送 http://localhost:8080/static/img/01.png 请求，该请求符合映射路径 /static/** ，此时将会把 img/01.png
+    补充到对应的 location 即 /static/img/ 后面，导致多了一个img,无法查找到文件。
+    -->
+<!--
+    <mvc:resources mapping="/static/img/*" location="/static/img/" />
+    <mvc:resources mapping="/static/**" location="/static/img/" />
+    <mvc:resources mapping="/static/html/**" location="/static/html/" />
+-->
+    <mvc:resources mapping="/**" location="/" />
+
 </beans>

@@ -1,12 +1,14 @@
 package com.longlong;
 
 import java.util.List;
+import java.util.Map;
 
 public class User {
     private String username;
     private String password;
     private List<String> favorites;
     private List<Book> books;
+    private Map<String,Object> map;
 
     @Override
     public String toString() {
@@ -15,6 +17,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", favorites=" + favorites +
                 ", books=" + books +
+                ", map=" + map +
                 '}';
     }
 
@@ -48,5 +51,13 @@ public class User {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public Map<String, Object> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, Object> map) {
+        this.map = map;
     }
 }
