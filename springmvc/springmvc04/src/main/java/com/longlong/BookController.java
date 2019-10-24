@@ -14,7 +14,7 @@ public class BookController {
 
     @GetMapping("/book")
     @ResponseBody
-    public void addBook(@Validated Book book, BindingResult bindingResult){
+    public void addBook(@Validated(ValitorGroup2.class) Book book, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             //如果Book校验失败
             List<ObjectError> allErrors = bindingResult.getAllErrors();
