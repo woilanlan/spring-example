@@ -9,7 +9,7 @@
     然后在 DispatcherServlet 中，进行请求的分发处理
 
     在 init-param 中指定 springMVC 配置文件位置
-    如果不指定，默认会在当前目录下 (/WEB-INF/) 查找名为 <servlet-name>.xml 的文件。(springmvc.xml)
+    如果不指定，默认会在当前目录下 (/WEB-INF/) 查找名为 <servlet-name>-servlet.xml 的文件。(springmvc-servlet.xml)
      -->
     <servlet>
         <servlet-name>springmvc</servlet-name>

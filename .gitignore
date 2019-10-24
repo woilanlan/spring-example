@@ -27,6 +27,9 @@ hs_err_pid*
 **/out/
 *.iml
 
+# IDEA打开maven项目编译输出的路径
+**/classes/
+
 # 忽略任何位置的 target 文件夹
 **/target/
 

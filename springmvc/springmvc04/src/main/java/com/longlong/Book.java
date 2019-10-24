@@ -1,8 +1,15 @@
 package com.longlong;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+
 public class Book {
-    private String name;
-    private String author;
+
+    @Length(min = 3,message = "{book.name.length}")
+    private String name;    //书名长度必须大于3
+    @NotNull(message = "{book.author.null}")
+    private String author;  //作者不能为空
 
     @Override
     public String toString() {
