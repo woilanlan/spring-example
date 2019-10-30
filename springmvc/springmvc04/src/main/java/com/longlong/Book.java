@@ -3,6 +3,8 @@ package com.longlong;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
 /*
 数据校验
@@ -39,11 +41,17 @@ public class Book {
     @NotNull(message = "{book.author.null}",groups = ValitorGroup2.class)
     private String author;  //作者不能为空
 
+    private Date publishDate;
+
+    private List<User> users;
+
     @Override
     public String toString() {
         return "Book{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
+                ", publishDate=" + publishDate +
+                ", users=" + users +
                 '}';
     }
 
@@ -61,5 +69,21 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

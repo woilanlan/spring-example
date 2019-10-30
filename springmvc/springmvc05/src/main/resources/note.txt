@@ -1,0 +1,20 @@
+Spring容器和SpringMVC容器的关系：
+Spring容器是一个父容器，SpringMVC容器是一个子容器，它继承自Spring容器。
+因此，在SpringMVC容器中，可以访问到Spring容器中定义的Bean，而在Spring容器中，无法访问SpringMVC容器中定义的Bean。
+在Web开发中，Controller全部在SpringMVC中扫描，除了Controller之外的Bean，全部在Spring容器中扫描（Service、Dao），
+按这种方式扫描，扫描完完成后，Controller可以访问到Service。
+
+1.为什么不全部都在Spring中扫描
+因为处理器映射器只会去SpringMVC中查找到Codtroller，如果没有，就找不到，不会去Spring中找，
+这就决定了，Controller必须在SprimgMVC中扫描。
+
+2.为什么不全部在SpringMVC中扫描
+在SSM整合或者Spring+SpringMVC+jdbcTemplate中，可以全部在SpringMVC中扫描，但是，在SSH整合中，这种方式不允许。
+
+最佳实践：
+1.Controller在SpringMVC中扫描，视图解析器等在SpringMVC容器中配置
+2.Spring中扫描Service、Dao以及其他组件，事务定义、数据源定义都在Spring容器中配置
+
+MySQL 8.0 Public Key Retrieval is not allowed 错误的解决方法
+https://blog.csdn.net/u013360850/article/details/80373604
+allowPublicKeyRetrieval=true
