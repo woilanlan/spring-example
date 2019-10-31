@@ -18,5 +18,6 @@
 
     <mappers>
         <mapper resource="com/longlong/UserDao.xml" />
+        <mapper resource="com/longlong/UserMapper.xml"/>
     </mappers>
 </configuration>

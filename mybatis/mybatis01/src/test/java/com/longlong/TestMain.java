@@ -1,15 +1,11 @@
 package com.longlong;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class TestMain {
 
@@ -53,5 +49,24 @@ public class TestMain {
     public void test3(){
         User user = (User) sqlSession.selectOne("UserDao.getUserById", 3);
         System.out.println(user);
+    }
+
+    @Test
+    public void test4(){
+        /*
+        SqlSession 接口
+        DefaultSqlSession 实现类
+        调用 Configuration 的 getMapper 方法
+        调用 MapperRegistry 的 getMapper 方法
+        mapperProxyFactory.newInstance(sqlSession)
+        通过java动态代理，自动提供了 UserMapper 的实现类
+         */
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setName("王五");
+        user.setAge(66);
+        user.setAddress("郑州");
+        int i = userMapper.addUser(user);
+        System.out.println(i);
     }
 }
