@@ -17,4 +17,20 @@ public class UserDao {
     public List<User> getAllUser(){
         return jdbcTemplate.query("select * from user",new BeanPropertyRowMapper<User>(User.class));
     }
+
+    public List<User> getAllUser(int Start, Integer count) {
+        return null;
+    }
+
+    public int addUser(User user) {
+    }
+
+    public User getUserById(Integer id) {
+    }
+
+    public int updateUserById(User user) {
+    }
+
+    public int deleteUserById(Integer id) {
+    }
 }
