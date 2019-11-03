@@ -19,6 +19,8 @@ MySQL 8.0 Public Key Retrieval is not allowed 错误的解决方法，（首先�
 https://blog.csdn.net/u013360850/article/details/80373604
 allowPublicKeyRetrieval=true
 
+---
+
 在RESTful中
 1、一个URL操作一个资源
 2、请求的URL中不能有动词
@@ -30,3 +32,35 @@ PUT	改	http://localhost:8080/book/1	修改id为1的书
 
 在RESTfl接口中，所有的方法都是返回SON，没有返回页面的（ModelAndView），因此，所有的方法上都需要添加@ResponseBody注解。
 一个替代的简化方案，是使用@RestController代替@Controller。
+
+在Restful风格的应用中，登录方案一般采用OAuth2协议，而不是传统的session
+
+---
+
+SpringMVC中的拦截器对应了Web基础中的过滤器。
+拦截器和过滤器的区别：
+1、一般来说，如果使用了SpringMVC框架，然后有拦截器的需求，建议使用拦截器而不是过滤器
+2、过滤器依赖于Serdet容器，而拦截器是SpringMVC自带的，不依赖容器
+3、拦截器的功能更为强大，因为拦截器是一中AOP风格的过滤器（实际上这个功能过滤器也能实现，只是没有拦截器这么简单明了）
+
+两个拦截器的preHandle方法返回值都是为true(所有的方法都执行了)：
+preHandle
+preHandle-2
+getAllUser
+postHandle-2
+postHandle
+afterCompletion-2
+afterCompletion
+
+第一个拦截器的preHande方法返回false（后面方法都没有执行了）：
+preHandle
+
+第一个拦截器的prelHande方法返回rue，第二个拦截器的preHande方法返回false，
+preHandle-2
+preHandle
+afterCompletion-2
+
+规则：
+1.所有拦截器的preHande方法返回true时，postHandle方法才会执行。
+2.拦截器自己的preHandle方法返回true时，后面的拦截器才会执行，同时他自己的afterCompletion也会执行。
+3.拦截器的执行顺序和xml中的定义顺序有关。（preHandle按照定义的顺序执行，postHandle和afterCompletion执行顺序与定义顺序相反）

@@ -26,6 +26,7 @@ public class UserController {
      */
     @GetMapping("/users")
     public List<User> getAllUser(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue = "5") Integer count){
+        System.out.println("getAllUser");
         return userService.getAllUser(page,count);
     }
 
@@ -41,11 +42,12 @@ public class UserController {
 
     /**
      * 使用POST请求来完成添加功能
+     * {"name":"张三","age":"89","address":"luoyang"}
      * @param user
      * @return
      */
     @PostMapping("/user")
-    public RespBean addUser(User user){
+    public RespBean addUser(@RequestBody User user){
         int result = userService.addUser(user);
         if(result == 1){
             return RespBean.ok("添加成功！");
@@ -62,8 +64,11 @@ public class UserController {
         return RespBean.error("删除失败！");
     }
 
+    /*
+    {"name":"李四","age":"89","address":"luoyang","id":"10"}
+     */
     @PutMapping("/user")
-    public RespBean updateUserById(User user){
+    public RespBean updateUserById(@RequestBody User user){
         int result = userService.updateUserById(user);
         if(result == 1){
             return RespBean.ok("更新成功！");

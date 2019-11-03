@@ -21,4 +21,17 @@
     </bean>
 
     <mvc:resources mapping="/**" location="/" />
+
+    <!-- 拦截器配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.longlong.interceptor.MyInterceptor2"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.longlong.interceptor.MyInterceptor1"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>
