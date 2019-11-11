@@ -1,8 +1,10 @@
 package com.longlong.mp01;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.longlong.mp01.bean.User;
 import com.longlong.mp01.dao.UserMapper;
 import org.junit.Assert;
@@ -21,7 +23,7 @@ import java.util.function.Predicate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SampleTest {
+public class SelectTest {
 
     @Autowired
     private UserMapper userMapper;
@@ -279,5 +281,83 @@ public class SampleTest {
         userList.forEach(System.out::println);
     }
 
+    /*
+    应用场景：
+    1、当你表字段特别多的时候，只需要其中几列，没有必要返回泛型为实体类的list
+    2、返回的不是一条条记录，是一个统计查询，返回统计结果
+     */
+    @Test
+    public void selectByWrapperMaps(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name","email").like("name","羽").lt("age",40);
+        List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 
+    /*
+    按照直属上级分组，查询每组的平均年龄、最大年龄、最小年龄，并且只取年龄总和小于500的组。
+    select manager_id,avg(age) avg_age,min(age) min_age,max(age) max_age
+    from user
+    group by manager_id
+    having sum(age) < 500;
+     */
+    @Test
+    public void selectByWrapperMaps2(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("manager_id","avg(age) avg_age","min(age) min_age","max(age) max_age")
+                .groupBy("manager_id").having("sum(age) < {0}",500);
+        List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /*
+    selectObjs 除了第一列，其他的都被舍弃了。
+     */
+    @Test
+    public void selectByWrapperObjs(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name","email").like("name","羽").lt("age",40);
+        List<Object> userList = userMapper.selectObjs(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectByWrapperCount(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name","羽").lt("age",40);
+        Integer count = userMapper.selectCount(queryWrapper);
+        System.out.println(count);
+    }
+
+    /*
+    返回多个结果将会报错
+     */
+    @Test
+    public void selectByWrapperOne(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name","关羽").lt("age",40);
+        User user = userMapper.selectOne(queryWrapper);
+        System.out.println(user);
+    }
+
+    /*'
+    防误写
+     */
+    @Test
+    public void selectLambda(){
+//        LambdaQueryWrapper<User> lambda = new QueryWrapper<User>().lambda();
+//        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+        lambdaQuery.like(User::getName,"羽").lt(User::getAge,40);
+        List<User> userList = userMapper.selectList(lambdaQuery);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectLambda3(){
+        List<User> userList = new LambdaQueryChainWrapper<User>(userMapper)
+                .like(User::getName, "羽").ge(User::getAge, 20).list();
+        userList.forEach(System.out::println);
+    }
 }
