@@ -360,4 +360,15 @@ public class SelectTest {
                 .like(User::getName, "羽").ge(User::getAge, 20).list();
         userList.forEach(System.out::println);
     }
+
+    /*
+    自定义方法
+     */
+    @Test
+    public void selectMy(){
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+        lambdaQuery.like(User::getName,"羽").lt(User::getAge,40);
+        List<User> userList = userMapper.selectAll(lambdaQuery);
+        userList.forEach(System.out::println);
+    }
 }
