@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    @Select("select * from user ${ew.customSqlSegment}")
+//    @Select("select * from user ${ew.customSqlSegment}")
     List<User> selectAll(@Param(Constants.WRAPPER) Wrapper<User> wrapper);
 }
