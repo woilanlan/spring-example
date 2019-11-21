@@ -6,4 +6,8 @@
     <select id="selectAll" resultType="com.longlong.mp01.bean.User">
         select * from user ${ew.customSqlSegment}
     </select>
+
+    <select id="selectUserPage" resultType="com.longlong.mp01.bean.User">
+        select * from user ${ew.customSqlSegment}
+    </select>
 </mapper>
