@@ -12,3 +12,18 @@ CREATE TABLE `mp_user` (
 
 AbstractWrapper
 
+主键策略：
+
+MP支持的主键策略实现
+
+枚举类：IdType
+
+局部主键策略实现
+
+@TableId(type = IdType.AUTO)
+
+全局主键策略实现
+
+mybatis-plus.global-config.db-config.id-type=uuid
+
+基本配置：
