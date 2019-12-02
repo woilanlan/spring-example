@@ -17,3 +17,8 @@ MyBatis中提供了一个名为MapperProxy的代理类，利用Java的动态代�
 具体流程：
 1.SqlSession只是一个接口，默认情况下，使用的是DefaultSqlSession作为SqlSession的实现。
 2.sqlSession.getMapper实际上是调用DefaultSqlSession中的getMapper方法，经过层层调用，最终，实际上是调用了MapperRegistry中的getMapper方法。
+3.在MapperRegistry中的getMapper方法中，最终又调用了MapperProxyFactory中的newInstance方法，在该方法中，
+首先创建了一个MapperProxy的实例，接下来给这个实例生成一个代理对象，最终方法调用时，实际上就是调用了这个代理对象。
+4.在代理对象中，有一个invoke方法，就是所有方法（增删改查）调用的入口。
+5.在MapperProxy的invoke方法中，最终调用到mapperMethod.execute（sqlSession args）
+6.最终，在MapperMethod类的execute方法中，执行相关操作。
