@@ -1,0 +1,19 @@
+Mapper的引入
+
+通过前面UserDao的设计，可以发现，UserDao中的代码都是模板化代码，都可以通过配置自动生成，因此，在实际开发中，Mapper可以按照如下方式设计
+
+1、定义Mapper接口，Mapper接口中，只需要声明方法名，方法参数、方法返回等信息
+
+2、在UserMapper.xm文件中，定义SQL片段，对于UserMapper.xm文件，有如下几个要求：
+
+- namespace必须是UserMapper.xml文件对应的UserMapper接口的全路径
+- sql片段的id必须是接口中的方法，包括定义的方法的返回值，参数等，接口和XML文件中都要一一对应。
+
+3、在java方法用调用Mapper即可
+
+调用的原理：
+MyBatis中提供了一个名为MapperProxy的代理类，利用Java的动态代理生成UserMapper的实现，然后调用动态代理中的方法。
+
+具体流程：
+1.SqlSession只是一个接口，默认情况下，使用的是DefaultSqlSession作为SqlSession的实现。
+2.sqlSession.getMapper实际上是调用DefaultSqlSession中的getMapper方法，经过层层调用，最终，实际上是调用了MapperRegistry中的getMapper方法。
