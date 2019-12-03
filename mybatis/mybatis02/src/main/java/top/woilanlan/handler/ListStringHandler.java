@@ -34,16 +34,25 @@ public class ListStringHandler extends BaseTypeHandler<List<String>> {
 
     public List<String> getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String s = rs.getString(columnName);
-        return Arrays.asList(s.split(";"));
+        if(s!=null){
+            return Arrays.asList(s.split(";"));
+        }
+        return null;
     }
 
     public List<String> getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String s = rs.getString(columnIndex);
-        return Arrays.asList(s.split(";"));
+        if(s!=null) {
+            return Arrays.asList(s.split(";"));
+        }
+        return null;
     }
 
     public List<String> getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         String s = cs.getString(columnIndex);
-        return Arrays.asList(s.split(";"));
+        if(s!=null) {
+            return Arrays.asList(s.split(";"));
+        }
+        return null;
     }
 }

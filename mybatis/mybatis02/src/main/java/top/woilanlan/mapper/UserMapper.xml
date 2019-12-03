@@ -12,4 +12,13 @@
     <insert id="addUser" parameterType="top.woilanlan.bean.User">
         insert into t_user (name,age,address,favorites) values (#{name},#{age},#{address},#{favorites,typeHandler=top.woilanlan.handler.ListStringHandler});
     </insert>
+    <select id="getUsersByPage" resultType="top.woilanlan.bean.User">
+        select * from t_user limit #{start},#{count};
+    </select>
+    <insert id="addUser2" parameterType="top.woilanlan.bean.UserWrapper">
+        insert into t_user (name,age,address,favorites) values (#{user.name},#{user.age},#{user.address},#{user.favorites,typeHandler=top.woilanlan.handler.ListStringHandler});
+    </insert>
+    <insert id="addUser3">
+        insert into t_user (name,age,address,favorites) values (#{name},#{age},#{address},#{favorites,typeHandler=top.woilanlan.handler.ListStringHandler});
+    </insert>
 </mapper>
