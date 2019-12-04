@@ -99,4 +99,10 @@ public class Test {
         System.out.println(i);
     }
 
+    @org.junit.Test
+    public void test7(){
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        HashMap<String, Object> map = userMapper.getUserById2(1);
+        System.out.println(map);
+    }
 }

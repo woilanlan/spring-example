@@ -21,4 +21,7 @@
     <insert id="addUser3">
         insert into t_user (name,age,address,favorites) values (#{name},#{age},#{address},#{favorites,typeHandler=top.woilanlan.handler.ListStringHandler});
     </insert>
+    <select id="getUserById2" resultType="java.util.HashMap">
+        select * from t_user where id = #{id};
+    </select>
 </mapper>

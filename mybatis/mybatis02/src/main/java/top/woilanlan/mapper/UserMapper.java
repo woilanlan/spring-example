@@ -21,5 +21,8 @@ public interface UserMapper {
     List<User> getUsersByPage(@Param("start") Integer start,@Param("count") Integer count);
 
     int addUser2(UserWrapper uw);
+
     int addUser3(HashMap<String,Object> map);
+
+    HashMap<String,Object> getUserById2(Integer id);
 }

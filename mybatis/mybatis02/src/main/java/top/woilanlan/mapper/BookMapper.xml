@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.woilanlan.mapper.BookMapper">
+    <!-- 定义映射关系 -->
+    <resultMap id="baseResultMap" type="top.woilanlan.bean.Book">
+        <constructor>
+            <idArg column="id" name="id"/>
+            <arg column="author" name="author"/>
+        </constructor>
+
+        <!--
+        <constructor>
+            <idArg column="id" name="arg0" javaType="java.lang.Integer"/>
+            <arg column="author" name="arg1" javaType="java.lang.String"/>
+        </constructor>
+        -->
+
+        <!--
+        <id property="id" column="id"/>
+        <result property="author" column="author"/>
+        <result property="name" column="b_name"/>
+        -->
+    </resultMap>
+    <select id="getAllBook" resultMap="baseResultMap">
+        select * from t_book tb;
+    </select>
+</mapper>

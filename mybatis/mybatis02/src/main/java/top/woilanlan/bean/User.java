@@ -9,6 +9,10 @@ public class User {
     private String address;
     private List<String> favorites;
 
+    public User() {
+        System.out.println("初始化User对象");
+    }
+
     @Override
     public String toString() {
         return "User{" +
