@@ -62,4 +62,17 @@
             (#{book.author},#{book.name})
         </foreach>
     </insert>
+    <!-- 去掉最后面的逗号 -->
+    <update id="updateBookById">
+        update t_book set
+        <trim suffixOverrides=",">
+            <if test="author!=null">
+                author = #{author},
+            </if>
+            <if test="name!=null">
+                b_name = #{name},
+            </if>
+        </trim>
+        where id = #{id};
+    </update>
 </mapper>

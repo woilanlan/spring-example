@@ -49,6 +49,8 @@ public interface BookMapper {
 }
 ```
 
+xml文件
+
 ```xml
 <select id="getBooksByIds" resultType="top.woilanlan.bean.Book">
     select * from t_book where id in
@@ -65,6 +67,8 @@ public interface BookMapper {
 ```
 
 ## trim
+
+
 
 ## set
 

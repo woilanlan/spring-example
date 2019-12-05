@@ -23,4 +23,6 @@ public interface BookMapper {
     List<Book> getBooksByIds(@Param("ids") Integer[] ids);
 
     int addBook(@Param("books") List<Book> books);
+
+    int updateBookById(Book book);
 }
