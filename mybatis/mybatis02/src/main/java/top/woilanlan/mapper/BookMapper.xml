@@ -23,7 +23,43 @@
         <result property="name" column="b_name"/>
         -->
     </resultMap>
+
     <select id="getAllBook" resultMap="baseResultMap">
         select * from t_book tb;
     </select>
+
+    <select id="getBookByAuthor" resultType="Book" parameterType="java.lang.String">
+        select * from t_book
+        <if test="author!=null">
+            where author = #{author}
+        </if>
+    </select>
+
+    <select id="getBookByAuthor2" resultType="top.woilanlan.bean.Book">
+        <!--
+        select * from t_book where 1=1
+        -->
+        select * from t_book
+        <where>
+            <if test="author!=null and author!=''">
+                and author = #{author}
+            </if>
+            <if test="id!=null">
+                and id > #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="getBooksByIds" resultType="top.woilanlan.bean.Book">
+        select * from t_book where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+    <insert id="addBook">
+        insert into t_book (author,b_name) values
+        <foreach collection="books" item="book" separator=",">
+            (#{book.author},#{book.name})
+        </foreach>
+    </insert>
 </mapper>

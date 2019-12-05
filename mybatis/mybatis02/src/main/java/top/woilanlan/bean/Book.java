@@ -7,7 +7,10 @@ public class Book {
     private String author;
     private String name;
 
-    public Book(@Param("id") Integer id,@Param("author") String author) {
+    public Book() {
+    }
+
+    public Book(@Param("id") Integer id, @Param("author") String author) {
         this.id = id;
         this.author = author;
     }
