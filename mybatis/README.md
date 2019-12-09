@@ -13,6 +13,11 @@ mybatis学习的一些例子
 
 1. mybatis-conf的配置
 2. 自定义类型转换
+3. Mapper的XML文件配置
+   1. 输入参数
+   2. resultType
+   3. resultMap
+4. 动态SQL
 
 ## mybatis-plus
 

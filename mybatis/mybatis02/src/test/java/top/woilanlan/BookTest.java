@@ -74,4 +74,13 @@ public class BookTest {
         int i = bookMapper.addBook(books);
         System.out.println(i);
     }
+
+    @Test
+    public void test6(){
+        Book book = new Book();
+        book.setId(5);
+        book.setAuthor("SHI NAI AN");
+        int i = bookMapper.updateBookById(book);
+        System.out.println(i);
+    }
 }

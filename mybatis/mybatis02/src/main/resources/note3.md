@@ -68,8 +68,43 @@ xml文件
 
 ## trim
 
+trim可以将SQL中最后的某个字符抹掉
 
+```xml
+<!-- 去掉最后面的逗号 -->
+<update id="updateBookById">
+    update t_book set
+    <trim suffixOverrides=",">
+        <if test="author!=null">
+            author = #{author},
+        </if>
+        <if test="name!=null">
+            b_name = #{name},
+        </if>
+    </trim>
+    where id = #{id};
+</update>
+```
 
 ## set
 
+也是用来解决更新问题的
+
 ## sql片段
+
+sql片段一般用来定义sql中的列。
+
+```xml
+<sql id="sql1">
+    tb.id as id,tb.b_name as name,tb.author as author
+</sql>
+
+<select id="getBooksByIds" resultType="top.woilanlan.bean.Book">
+    select 
+    <include refid="sql1"></include>
+    from t_book tb where id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+        #{id}
+    </foreach>
+</select>
+```

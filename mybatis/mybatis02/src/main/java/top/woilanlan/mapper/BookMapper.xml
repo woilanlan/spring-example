@@ -49,13 +49,20 @@
             </if>
         </where>
     </select>
+    
+    <sql id="sql1">
+        tb.id as id,tb.b_name as name,tb.author as author
+    </sql>
 
     <select id="getBooksByIds" resultType="top.woilanlan.bean.Book">
-        select * from t_book where id in
+        select 
+        <include refid="sql1"></include>
+        from t_book tb where id in
         <foreach collection="ids" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </select>
+
     <insert id="addBook">
         insert into t_book (author,b_name) values
         <foreach collection="books" item="book" separator=",">
@@ -64,15 +71,17 @@
     </insert>
     <!-- 去掉最后面的逗号 -->
     <update id="updateBookById">
-        update t_book set
-        <trim suffixOverrides=",">
-            <if test="author!=null">
-                author = #{author},
-            </if>
-            <if test="name!=null">
-                b_name = #{name},
-            </if>
-        </trim>
+        update t_book
+        <set>
+            <trim suffixOverrides=",">
+                <if test="author!=null">
+                    author = #{author},
+                </if>
+                <if test="name!=null">
+                    b_name = #{name},
+                </if>
+            </trim>
+        </set>
         where id = #{id};
     </update>
 </mapper>
