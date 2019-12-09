@@ -83,4 +83,14 @@ public class BookTest {
         int i = bookMapper.updateBookById(book);
         System.out.println(i);
     }
+
+    @Test
+    public void test7(){
+        Book book = new Book();
+        book.setName("出师表");
+        book.setAuthor("诸葛亮");
+        int i = bookMapper.insertBook(book);
+        System.out.println(i);
+        System.out.println(book);
+    }
 }

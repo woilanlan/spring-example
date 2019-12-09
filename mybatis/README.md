@@ -18,6 +18,7 @@ mybatis学习的一些例子
    2. resultType
    3. resultMap
 4. 动态SQL
+5. 主键回填
 
 ## mybatis-plus
 

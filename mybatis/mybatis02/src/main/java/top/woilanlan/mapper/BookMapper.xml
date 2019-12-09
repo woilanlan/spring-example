@@ -84,4 +84,16 @@
         </set>
         where id = #{id};
     </update>
+
+    <!--
+    <insert id="insertBook" useGeneratedKeys="true" keyProperty="id">
+        insert into t_book (b_name,author) values (#{name},#{author});
+    </insert>
+    -->
+    <insert id="insertBook">
+        <selectKey keyProperty="id" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
+        insert into t_book (b_name,author) values (#{name},#{author});
+    </insert>
 </mapper>
