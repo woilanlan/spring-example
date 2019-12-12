@@ -39,6 +39,34 @@
     </association>
   </resultMap>
 
+  <resultMap id="BaseResultMap3" type="top.woilanlan.bean.Employee" extends="BaseResultMap">
+    <association property="department"
+                 select="top.woilanlan.mapper.EmployeeMapper.getDeptByEid"
+                 column="departmentId"
+                 fetchType="lazy">
+    </association>
+  </resultMap>
+  <resultMap id="DepResultMap" type="top.woilanlan.bean.Department">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="depPath" jdbcType="VARCHAR" property="deppath" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="isParent" jdbcType="BIT" property="isparent" />
+  </resultMap>
+
+  <select id="getEmployeeById" resultMap="BaseResultMap2">
+    select e.*,d.id as did,d.name as dname from department d,employee e where e.departmentId = d.id and e.id = #{eid};
+  </select>
+
+  <select id="getEmployeeById2" resultMap="BaseResultMap3">
+    select * from employee where id = #{eid}
+  </select>
+
+  <select id="getDeptByEid" resultMap="DepResultMap">
+    select * from department where id = #{did};
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where id = #{id,jdbcType=INTEGER}
@@ -112,7 +140,4 @@
     from employee
   </select>
 
-  <select id="getEmployeeById" resultMap="BaseResultMap2">
-    select e.*,d.id as did,d.name as dname from department d,employee e where e.departmentId = d.id and e.id = #{eid};
-  </select>
 </mapper>

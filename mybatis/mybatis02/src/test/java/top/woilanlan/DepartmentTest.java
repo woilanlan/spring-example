@@ -33,4 +33,11 @@ public class DepartmentTest {
         Department department = departmentMapper.getDepartmentById(5);
         System.out.println(department);
     }
+
+    @Test
+    public void test2(){
+        Department department = departmentMapper.getDepartmentById2(5);
+//        System.out.println(department.getName());
+        System.out.println(department);
+    }
 }

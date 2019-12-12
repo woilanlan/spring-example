@@ -30,4 +30,11 @@ public class EmployeeTest {
         Employee employee = employeeMapper.getEmployeeById(1);
         System.out.println(employee);
     }
+
+    @Test
+    public void test2(){
+        Employee employee = employeeMapper.getEmployeeById2(1);
+        System.out.println(employee.getName());
+        //System.out.println(employee);
+    }
 }
