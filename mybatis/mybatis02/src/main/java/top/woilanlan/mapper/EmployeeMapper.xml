@@ -30,6 +30,9 @@
     <result column="beginContract" jdbcType="DATE" property="begincontract" />
     <result column="endContract" jdbcType="DATE" property="endcontract" />
     <result column="workAge" jdbcType="INTEGER" property="workage" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap2" type="top.woilanlan.bean.Employee" extends="BaseResultMap">
     <association property="department" javaType="top.woilanlan.bean.Department">
       <id column="did" property="id"/>
       <result column="dname" property="name"/>
@@ -109,7 +112,7 @@
     from employee
   </select>
 
-  <select id="getEmployeeById" resultMap="BaseResultMap">
+  <select id="getEmployeeById" resultMap="BaseResultMap2">
     select e.*,d.id as did,d.name as dname from department d,employee e where e.departmentId = d.id and e.id = #{eid};
   </select>
 </mapper>

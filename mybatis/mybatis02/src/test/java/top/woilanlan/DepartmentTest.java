@@ -4,19 +4,22 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import top.woilanlan.bean.Department;
 import top.woilanlan.bean.Employee;
+import top.woilanlan.mapper.DepartmentMapper;
 import top.woilanlan.mapper.EmployeeMapper;
 
 import java.io.IOException;
 
-public class EmployeeTest {
+public class DepartmentTest {
     private SqlSession sqlSession;
-    private EmployeeMapper employeeMapper;
+    private DepartmentMapper departmentMapper;
+
 
     @Before
     public void before() throws IOException {
         sqlSession = DBUtils.getInstance().openSession();
-        employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+        departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
     }
 
     @After
@@ -27,7 +30,7 @@ public class EmployeeTest {
 
     @Test
     public void test(){
-        Employee employee = employeeMapper.getEmployeeById(1);
-        System.out.println(employee);
+        Department department = departmentMapper.getDepartmentById(5);
+        System.out.println(department);
     }
 }

@@ -9,6 +9,13 @@
     <result column="enabled" jdbcType="BIT" property="enabled" />
     <result column="isParent" jdbcType="BIT" property="isparent" />
   </resultMap>
+  <resultMap id="BaseResultMap2" type="top.woilanlan.bean.Department" extends="BaseResultMap">
+    <collection property="emps" ofType="top.woilanlan.bean.Employee">
+      <id column="eid" property="id"/>
+      <result column="ename" property="name"/>
+    </collection>
+  </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from department
     where id = #{id,jdbcType=INTEGER}
@@ -36,5 +43,9 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, parentId, depPath, enabled, isParent
     from department
+  </select>
+
+  <select id="getDepartmentById" resultMap="BaseResultMap2">
+    select d.*,e.id as eid,e.name as ename from department d,employee e where e.departmentId = d.id and d.id = #{id}
   </select>
 </mapper>

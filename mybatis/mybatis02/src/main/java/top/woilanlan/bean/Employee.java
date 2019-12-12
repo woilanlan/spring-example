@@ -61,6 +61,41 @@ public class Employee {
 
     private Department department;
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", idcard='" + idcard + '\'' +
+                ", wedlock='" + wedlock + '\'' +
+                ", nationid=" + nationid +
+                ", nativeplace='" + nativeplace + '\'' +
+                ", politicid=" + politicid +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", departmentid=" + departmentid +
+                ", joblevelid=" + joblevelid +
+                ", posid=" + posid +
+                ", engageform='" + engageform + '\'' +
+                ", tiptopdegree='" + tiptopdegree + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", school='" + school + '\'' +
+                ", begindate=" + begindate +
+                ", workstate='" + workstate + '\'' +
+                ", workid='" + workid + '\'' +
+                ", contractterm=" + contractterm +
+                ", conversiontime=" + conversiontime +
+                ", notworkdate=" + notworkdate +
+                ", begincontract=" + begincontract +
+                ", endcontract=" + endcontract +
+                ", workage=" + workage +
+                ", department=" + department +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

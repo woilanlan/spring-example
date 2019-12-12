@@ -1,5 +1,7 @@
 package top.woilanlan.bean;
 
+import java.util.List;
+
 public class Department {
     private Integer id;
 
@@ -12,6 +14,21 @@ public class Department {
     private Boolean enabled;
 
     private Boolean isparent;
+
+    private List<Employee> emps;
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentid=" + parentid +
+                ", deppath='" + deppath + '\'' +
+                ", enabled=" + enabled +
+                ", isparent=" + isparent +
+                ", emps=" + emps +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -59,5 +76,13 @@ public class Department {
 
     public void setIsparent(Boolean isparent) {
         this.isparent = isparent;
+    }
+
+    public List<Employee> getEmps() {
+        return emps;
+    }
+
+    public void setEmps(List<Employee> emps) {
+        this.emps = emps;
     }
 }
