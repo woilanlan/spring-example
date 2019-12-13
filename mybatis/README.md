@@ -19,6 +19,16 @@ mybatis学习的一些例子
    3. resultMap
 4. 动态SQL
 5. 主键回填
+6. MyBatis Generator
+7. 关联查询
+   1. 一对一
+   2. 一对多
+8. 延迟查询
+9. 缓存
+
+## ssm03
+
+ssm整合
 
 ## mybatis-plus
 

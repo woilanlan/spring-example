@@ -40,4 +40,30 @@ public class DepartmentTest {
 //        System.out.println(department.getName());
         System.out.println(department);
     }
+
+    /*
+    一级缓存，发现只执行了一次
+     */
+    @Test
+    public void test3(){
+        Department department = departmentMapper.getDepartmentById2(5);
+        System.out.println(department.getName());
+        Department department2 = departmentMapper.getDepartmentById2(5);
+        System.out.println(department2.getName());
+    }
+
+    /*
+    执行两次sql
+     */
+    @Test
+    public void test4(){
+        Department department = departmentMapper.getDepartmentById2(5);
+        System.out.println(department.getName());
+        sqlSession.commit();
+        sqlSession.close();
+        sqlSession = DBUtils.getInstance().openSession();
+        departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
+        Department department2 = departmentMapper.getDepartmentById2(5);
+        System.out.println(department2.getName());
+    }
 }

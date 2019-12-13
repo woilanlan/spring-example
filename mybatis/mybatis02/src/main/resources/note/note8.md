@@ -1,0 +1,11 @@
+# 缓存
+
+MyBatis支持1级缓存和2级缓存，在实际开发中，实际上很少使用到MyBatis自带的缓存，大部分情况下，
+缓存都是使用EHCache，MemoryCache、Redis等等来实现缓存。
+
+MyBatis中1级缓存是基于SqlSesion的，二级缓存基于SqlSessionFactory。
+
+Mybatis一级缓存的作用域是同一个SqlSession，在同一个sqlSession中两次执行相同的sql语句，
+第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。
+当一个sqlSession结束后该sqlSession中的一级缓存也就不存在了。Mybatis默认开启一级缓存。
+
