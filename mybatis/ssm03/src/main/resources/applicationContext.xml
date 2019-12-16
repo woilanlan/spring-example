@@ -9,7 +9,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <context:property-placeholder location="db.properties"/>
+    <context:property-placeholder location="classpath:db.properties"/>
 
     <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
         <property name="url" value="${db.url}"/>
@@ -39,6 +39,7 @@
     <!--
     这个Bean的作用类似于mybatis-conf.xml配置文件的作用
     classpath* 表示去匹配路径下的多个文件
+    configLocation 引入mybatis的配置文件
     -->
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -48,6 +49,12 @@
             </list>
         </property>
         <property name="typeAliasesPackage" value="top.woilanlan.bean"/>
-
+        <!--
+        <property name="configLocation" value="classpath:mybatis-conf.xml"/>
+        -->
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="top.woilanlan.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
     </bean>
 </beans>

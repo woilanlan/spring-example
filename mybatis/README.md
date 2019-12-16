@@ -28,7 +28,16 @@ mybatis学习的一些例子
 
 ## ssm03
 
-ssm整合
+1. ssm整合
+2. mybatis-spring
+
+## jdbctest
+
+通过jdbc驱动，操作数据库
+
+1. Statement
+2. PreparedStatement
+3. 主键回填
 
 ## mybatis-plus
 
