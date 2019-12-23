@@ -1,0 +1,19 @@
+wechat:
+  app-id: wx401001488c77f63a
+  app-secret: a60d5a10e7698bf30137252dd13bea94
+  token: xkcoding
+
+wx:
+  # 微信授权登录配置
+  # 凭证获取GET
+  wx_token_url: https://open.weixin.qq.com/connect/oauth2/authorize?
+  # 用户同意授权,回调url----你的域名后面再加上/getcode
+  wx_redirect_url: http://woilanlan.51vip.biz/wx/getcode
+  # 获取openid
+  wx_openid_url: https://api.weixin.qq.com/sns/oauth2/access_token?
+  # 拉取用户信息
+  wx_userinfo_url: https://api.weixin.qq.com/sns/userinfo?
+  # 微信appid-----换成自己的
+  wx_appid: wx5c5335fd456fb22d
+  # 微信appSecret-----换成自己的
+  wx_secret: 0e24ba1bfd63fac5179b554b833b8c6e
