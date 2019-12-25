@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.woilanlan.mapper.MeetingParticipantsMapper">
+  <resultMap id="BaseResultMap" type="top.woilanlan.bean.MeetingParticipants">
+    <result column="meetingid" jdbcType="INTEGER" property="meetingid" />
+    <result column="employeeid" jdbcType="INTEGER" property="employeeid" />
+  </resultMap>
+  <insert id="insert" parameterType="top.woilanlan.bean.MeetingParticipants">
+    insert into meetingparticipants (meetingid, employeeid)
+    values (#{meetingid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select meetingid, employeeid
+    from meetingparticipants
+  </select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.woilanlan.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="top.woilanlan.bean.Employee">
+    <id column="employeeid" jdbcType="INTEGER" property="employeeid" />
+    <result column="employeename" jdbcType="VARCHAR" property="employeename" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="departmentid" jdbcType="INTEGER" property="departmentid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.woilanlan.bean.Employee">
+    insert into employee (employeeid, employeename, username, 
+      phone, email, status, 
+      departmentid, password, role
+      )
+    values (#{employeeid,jdbcType=INTEGER}, #{employeename,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{departmentid,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="top.woilanlan.bean.Employee">
+    update employee
+    set employeename = #{employeename,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      departmentid = #{departmentid,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR}
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select employeeid, employeename, username, phone, email, status, departmentid, password, 
+    role
+    from employee
+    where employeeid = #{employeeid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select employeeid, employeename, username, phone, email, status, departmentid, password, 
+    role
+    from employee
+  </select>
+</mapper>

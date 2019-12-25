@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.woilanlan.mapper.MeetingMapper">
+  <resultMap id="BaseResultMap" type="top.woilanlan.bean.Meeting">
+    <id column="meetingid" jdbcType="INTEGER" property="meetingid" />
+    <result column="meetingname" jdbcType="VARCHAR" property="meetingname" />
+    <result column="roomid" jdbcType="INTEGER" property="roomid" />
+    <result column="reservationistid" jdbcType="INTEGER" property="reservationistid" />
+    <result column="numberofparticipants" jdbcType="INTEGER" property="numberofparticipants" />
+    <result column="starttime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="reservationtime" jdbcType="TIMESTAMP" property="reservationtime" />
+    <result column="canceledtime" jdbcType="TIMESTAMP" property="canceledtime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meeting
+    where meetingid = #{meetingid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.woilanlan.bean.Meeting">
+    insert into meeting (meetingid, meetingname, roomid, 
+      reservationistid, numberofparticipants, 
+      starttime, endtime, reservationtime, 
+      canceledtime, description, status
+      )
+    values (#{meetingid,jdbcType=INTEGER}, #{meetingname,jdbcType=VARCHAR}, #{roomid,jdbcType=INTEGER}, 
+      #{reservationistid,jdbcType=INTEGER}, #{numberofparticipants,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{reservationtime,jdbcType=TIMESTAMP}, 
+      #{canceledtime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="top.woilanlan.bean.Meeting">
+    update meeting
+    set meetingname = #{meetingname,jdbcType=VARCHAR},
+      roomid = #{roomid,jdbcType=INTEGER},
+      reservationistid = #{reservationistid,jdbcType=INTEGER},
+      numberofparticipants = #{numberofparticipants,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      reservationtime = #{reservationtime,jdbcType=TIMESTAMP},
+      canceledtime = #{canceledtime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where meetingid = #{meetingid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select meetingid, meetingname, roomid, reservationistid, numberofparticipants, starttime, 
+    endtime, reservationtime, canceledtime, description, status
+    from meeting
+    where meetingid = #{meetingid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select meetingid, meetingname, roomid, reservationistid, numberofparticipants, starttime, 
+    endtime, reservationtime, canceledtime, description, status
+    from meeting
+  </select>
+</mapper>
