@@ -11,6 +11,12 @@ public class Employee {
 
     private String email;
 
+    /*
+    0 未审批
+    1 审批通过
+    2 审批未通过
+    3 账户锁定
+     */
     private String status;
 
     private Integer departmentid;

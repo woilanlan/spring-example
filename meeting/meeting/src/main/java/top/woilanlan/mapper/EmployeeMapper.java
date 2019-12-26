@@ -1,6 +1,8 @@
 package top.woilanlan.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import top.woilanlan.bean.Employee;
 
 public interface EmployeeMapper {
@@ -13,4 +15,6 @@ public interface EmployeeMapper {
     List<Employee> selectAll();
 
     int updateByPrimaryKey(Employee record);
+
+    Employee doLogin(@Param("username") String username,@Param("password") String password);
 }

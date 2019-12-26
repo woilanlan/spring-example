@@ -54,6 +54,9 @@
 
     如果浏览器发送 http://localhost:8080/static/img/01.png 请求，该请求符合映射路径 /static/** ，此时将会把 img/01.png
     补充到对应的 location 即 /static/img/ 后面，导致多了一个img,无法查找到文件。
+
+    <mvc:resources mapping="/**" location="/static/"/>
+    注意项目的部署目录，这里的/**,实际作用范围或匹配规则是 /应用上下文/**
     -->
 <!--
     <mvc:resources mapping="/static/img/*" location="/static/img/" />

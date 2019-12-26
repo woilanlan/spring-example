@@ -12,6 +12,11 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
+
+  <select id="doLogin" resultMap="BaseResultMap">
+    select * from employee where username = #{username} and password = #{password};
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where employeeid = #{employeeid,jdbcType=INTEGER}
