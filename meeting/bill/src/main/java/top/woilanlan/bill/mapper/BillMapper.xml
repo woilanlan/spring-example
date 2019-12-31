@@ -5,30 +5,48 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bill
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="top.woilanlan.bill.bean.Bill">
-    insert into bill (id, name, money
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}
-      )
+    insert into bill (id, name, money, 
+      created_time, updated_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insert2" parameterType="top.woilanlan.bill.bean.Bill">
+    insert into bill (id, name, money,
+      created_time, updated_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL},
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPrimaryKey" parameterType="top.woilanlan.bill.bean.Bill">
     update bill
-    set name = #{name,jdbcType=VARCHAR},
-      money = #{money,jdbcType=DECIMAL}
+    <set>
+      <trim suffixOverrides=",">
+        name = #{name,jdbcType=VARCHAR},
+        money = #{money,jdbcType=DECIMAL},
+        <if test="createdTime!=null">
+          created_time = #{createdTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updatedTime!=null">
+          updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, money
+    select id, name, money, created_time, updated_time
     from bill
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, money
+    select id, name, money, created_time, updated_time
     from bill
   </select>
 </mapper>

@@ -9,6 +9,9 @@ import top.woilanlan.bill.mapper.BillMapper;
 import top.woilanlan.bill.util.DBUtils;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 
 public class BillTest {
@@ -31,8 +34,11 @@ public class BillTest {
     @Test
     public void test1(){
         Bill bill = new Bill();
-        bill.setName("one");
+        bill.setName("two");
         bill.setMoney(new BigDecimal("99.99"));
+        LocalDateTime dateTime = LocalDateTime.now();
+        bill.setCreatedTime(dateTime);
+        bill.setUpdatedTime(dateTime);
         int insert = billMapper.insert(bill);
         System.out.println(insert);
     }
@@ -46,9 +52,9 @@ public class BillTest {
     @Test
     public void test3(){
         Bill bill = new Bill();
-        bill.setId(5);
+        bill.setId(8);
         bill.setName("one");
-        bill.setMoney(new BigDecimal("99.99"));
+        bill.setMoney(new BigDecimal("8.01"));
         int i = billMapper.updateByPrimaryKey(bill);
         System.out.println(i);
     }
