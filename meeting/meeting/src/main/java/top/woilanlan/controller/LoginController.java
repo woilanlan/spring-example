@@ -27,7 +27,7 @@ public class LoginController {
         Employee employee = employeeService.doLogin(username,password);
         if (employee != null) {
             if("1".equals(employee.getStatus())){
-                req.getSession().setAttribute("LoginUser",employee);
+                req.getSession().setAttribute("loginUser",employee);
                 return "redirect:/notifications";
             }
             else if("0".equals(employee.getStatus())){

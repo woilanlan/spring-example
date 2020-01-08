@@ -11,10 +11,10 @@
          <div class="sidebar-menugroup">
             <div class="sidebar-grouptitle">人员管理</div>
             <ul class="sidebar-menu">
-                <li class="sidebar-menuitem"><a href="departments.html">部门管理</a></li>
-                <li class="sidebar-menuitem"><a href="register.html">员工注册</a></li>
-                <li class="sidebar-menuitem"><a href="approveaccount.html">注册审批</a></li>
-                <li class="sidebar-menuitem"><a href="searchemployees.html">搜索员工</a></li>
+                <li class="sidebar-menuitem"><a href="/meeting/departments">部门管理</a></li>
+                <li class="sidebar-menuitem"><a href="/meeting/register">员工注册</a></li>
+                <li class="sidebar-menuitem"><a href="/meeting/approveaccount">注册审批</a></li>
+                <li class="sidebar-menuitem"><a href="/meeting/searchemployees">搜索员工</a></li>
             </ul>
         </div>
     </#if>

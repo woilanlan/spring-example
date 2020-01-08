@@ -12,7 +12,9 @@ public class UserCenterController {
 
     @GetMapping("/notifications")
     public String notifications(Model model, HttpServletRequest req){
-        model.addAttribute("e", ((Employee) req.getSession().getAttribute("LoginUser")));
+        model.addAttribute("e", ((Employee) req.getSession().getAttribute("loginUser")));
         return "notifications";
     }
+
+
 }

@@ -4,7 +4,7 @@
 
 可以使用以项目名开头的绝对路径，配置静态资源的位置即可。
 
-```
+```log
 如果项目部署的 Application context 为 /
 则静态资源的路径为：/images/footer.png
 /代表从服务器的根目录，即 http:localhost:8080/ 开始

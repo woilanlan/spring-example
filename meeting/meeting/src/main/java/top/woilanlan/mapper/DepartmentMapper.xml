@@ -5,6 +5,10 @@
     <id column="departmentid" jdbcType="INTEGER" property="departmentid" />
     <result column="departmentname" jdbcType="VARCHAR" property="departmentname" />
   </resultMap>
+  <select id="getDepByName" resultMap="BaseResultMap">
+    select * from department where departmentname = #{depName};
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from department
     where departmentid = #{departmentid,jdbcType=INTEGER}
