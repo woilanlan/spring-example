@@ -30,4 +30,8 @@ public class DepartmentService {
     public void deleteById(Integer id) {
         departmentMapper.deleteByPrimaryKey(id);
     }
+
+    public int updateDep(Department department) {
+        return departmentMapper.updateByPrimaryKey(department);
+    }
 }

@@ -46,8 +46,10 @@
                         <td>${dep.departmentid}</td>
                         <td id="td_${dep.departmentid}">${dep.departmentname}</td>
                         <td>
-                            <a class="clickbutton" href="#" onclick="showEditView(${dep.departmentid})">编辑</a>
-                            <a class="clickbutton" href="/meeting/dep?id=${dep.departmentid}">删除</a>
+                            <a id="edit_${dep.departmentid}" class="clickbutton" href="#" onclick="showEditView(${dep.departmentid})">编辑</a>
+                            <a id="confirm_${dep.departmentid}" class="clickbutton" href="#" onclick="doUpdate(${dep.departmentid})" style="display: none">确定</a>
+                            <a id="cancel_${dep.departmentid}" class="clickbutton" href="#" onclick="cancel(${dep.departmentid},'${dep.departmentname}')" style="display: none">取消</a>
+                            <a id="delete_${dep.departmentid}" class="clickbutton" href="/meeting/dep?id=${dep.departmentid}">删除</a>
                         </td>
                     </tr>
                 </#list>
@@ -64,7 +66,49 @@
     function showEditView(id) {
         var el = $("#td_"+id);
         var oldDep = el.html();
-        el.html("<input type='text' value='"+oldDep+"' />")
+        el.html("<input type='text' value='"+oldDep+"' />");
+        btnSwitch(0,id);
+    }
+    function doUpdate(id) {
+        // var el = $("#td_"+id);
+        // var children = el.children();
+        // alert(JSON.stringify(children));
+        // $("#td_"+id).children()[0].value;
+
+        var el = $("#td_"+id+" > input");
+        $.post("/meeting/updateDep",{departmentid:id,departmentname:el.val()},function (msg) {
+            //刷新页面
+            if (msg.status == 200) {
+                window.location.href = '/meeting/departments';
+            }else{
+                alert("修改失败");
+            }
+        });
+    }
+    function cancel(id,name) {
+        var el = $("#td_"+id);
+        el.html(name);
+        btnSwitch(1,id);
+    }
+
+    function btnSwitch(i,id) {
+        var editBtn = $("#edit_"+id);
+        var confirmBtn = $("#confirm_"+id);
+        var cancelBtn = $("#cancel_"+id);
+        var deleteBtn = $("#delete_"+id);
+        if(i == 0){
+            // editBtn.css("display","none");
+            // confirmBtn.css("display","inline");
+            editBtn.hide();
+            confirmBtn.show();
+            cancelBtn.show();
+            deleteBtn.hide();
+        }else if(i == 1){
+            editBtn.show();
+            confirmBtn.hide();
+            cancelBtn.hide();
+            deleteBtn.show();
+        }
     }
 </script>
 </body>
